@@ -1,3 +1,5 @@
+'''This code compute how many percent of white is there in the picture'''
+
 # Importing libraries
 import cv2
 import numpy as np
@@ -8,7 +10,7 @@ import csv
 lower_bound = np.array([0, 0, 137])
 upper_bound = np.array([161, 54, 255])
 
-# Constant of computing from rectangle to circle
+# Constant for computing from rectangle to circle
 constant = (1296 * 972) / (pi * (450 ** 2))
 
 
@@ -33,7 +35,7 @@ def main_loop(num_photos, path_to_file, constant_image, debug=False):
         img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
         msk = cv2.inRange(img_hsv, lower_bound, upper_bound)
 
-        # Computing of percentage, print it for checking is it right and append it to list of percentage
+        # Computing of percentage, print it for checking if it is right and write it to the .csv file
         text = (calc_percentage(msk) * constant_image)
         csv_writer.writerow([str(text)])
         if debug:
